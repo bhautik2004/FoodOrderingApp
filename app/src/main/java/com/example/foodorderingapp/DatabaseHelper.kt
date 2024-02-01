@@ -1,5 +1,6 @@
 package com.example.foodorderingapp
 
+import android.annotation.SuppressLint
 import android.content.ContentValues
 import android.content.Context
 import android.database.Cursor
@@ -175,6 +176,7 @@ class DatabaseHelper(private val context: Context) : SQLiteOpenHelper(
         return isuser
     }
 
+    @SuppressLint("Range")
     fun getUserIdByEmail(email: String): Long {
         val db = readableDatabase
         val columns = arrayOf(COLUMN_ID)
@@ -192,17 +194,6 @@ class DatabaseHelper(private val context: Context) : SQLiteOpenHelper(
         db.close()
         return userId
     }
-
-    fun addadmin(name: String, email: String, password: String): Long {
-        val values = ContentValues().apply {
-            put(COLUMN_NAME, name)
-            put(COLUMN_EMAIL, email)
-            put(COLUMN_PASSWORD, password)
-        }
-        val db = this.writableDatabase
-        return db.insert(TABLE_ADMIN, null, values)
-    }
-
     fun adminlogin(email: String, password: String): Boolean {
         val db = this.readableDatabase
         val selection = "$COLUMN_EMAIL = ? AND $COLUMN_PASSWORD = ?"
@@ -232,6 +223,7 @@ class DatabaseHelper(private val context: Context) : SQLiteOpenHelper(
 
     }
 
+    @SuppressLint("Range")
     fun getUserNameByEmail(email: String): String? {
         val db = readableDatabase
         val columns = arrayOf(COLUMN_NAME)
@@ -250,6 +242,7 @@ class DatabaseHelper(private val context: Context) : SQLiteOpenHelper(
         return userName
     }
 
+    @SuppressLint("Range")
     fun getAdminNameByEmail(email: String): String? {
         val db = readableDatabase
         val columns = arrayOf(COLUMN_NAME)
@@ -284,6 +277,7 @@ class DatabaseHelper(private val context: Context) : SQLiteOpenHelper(
         return cursor
     }
 
+    @SuppressLint("Range")
     fun getAllFoodItem(): ArrayList<FoodItem> {
         val itemList = ArrayList<FoodItem>()
         val selectQry = "SELECT * FROM $TABLE_FOOD"
@@ -345,6 +339,7 @@ class DatabaseHelper(private val context: Context) : SQLiteOpenHelper(
         db.close()
     }
 
+    @SuppressLint("Range")
     fun addToCart(userId: Long, foodId: Int, quantity: Int): Long {
         val db = this.writableDatabase
 
@@ -375,6 +370,7 @@ class DatabaseHelper(private val context: Context) : SQLiteOpenHelper(
         return id
     }
 
+    @SuppressLint("Range")
     fun getCartItems(userId: Long): ArrayList<CartItem> {
         val itemList = ArrayList<CartItem>()
 
@@ -451,6 +447,7 @@ class DatabaseHelper(private val context: Context) : SQLiteOpenHelper(
         return rowsAffected > 0
     }
 
+    @SuppressLint("Range")
     fun getAllOrders(): ArrayList<Order> {
         val orderList = ArrayList<Order>()
 
@@ -476,6 +473,7 @@ class DatabaseHelper(private val context: Context) : SQLiteOpenHelper(
         return orderList
     }
 
+    @SuppressLint("Range")
     fun getOrderDetails(orderId: Long): OrderDetails? {
         val db = readableDatabase
         val columns = arrayOf(
@@ -524,6 +522,7 @@ class DatabaseHelper(private val context: Context) : SQLiteOpenHelper(
         return orderDetails
     }
 
+    @SuppressLint("Range")
     fun getOrderedItems(orderId: Long): List<CartItem> {
         val itemList = ArrayList<CartItem>()
 
@@ -586,6 +585,7 @@ class DatabaseHelper(private val context: Context) : SQLiteOpenHelper(
         )
     }
 
+    @SuppressLint("Range")
     fun getFoodOrderDetailsForUser(email: String): ArrayList<MyOrderDetails> {
         val foodOrderDetailsList = ArrayList<MyOrderDetails>()
 
