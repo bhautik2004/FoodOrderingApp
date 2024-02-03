@@ -1,4 +1,5 @@
 package com.example.foodorderingapp
+import android.annotation.SuppressLint
 import android.graphics.BitmapFactory
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -22,6 +23,7 @@ class ItemDetailActivity : AppCompatActivity() {
         showItemDetails()
     }
 
+    @SuppressLint("Range")
     private fun showItemDetails() {
         val selectQry = "SELECT * FROM food_items WHERE id =\"$recordId\""
         val db = dbHelper!!.writableDatabase

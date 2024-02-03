@@ -33,8 +33,4 @@
         app:layout_constraintTop_toBottomOf="@+id/textView13"
         tools:listitem="@layout/myorder_sample"
         />
-
-
-
-
 </androidx.constraintlayout.widget.ConstraintLayout>

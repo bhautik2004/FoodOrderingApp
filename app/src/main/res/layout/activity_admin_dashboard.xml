@@ -13,7 +13,7 @@
             android:layout_height="36dp"
             android:layout_marginLeft="8dp"
             android:layout_marginTop="16dp"
-            android:src="@drawable/logo"
+            app:srcCompat="@drawable/logo"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -65,7 +65,7 @@
                     android:layout_width="24dp"
                     android:layout_height="24dp"
                     android:layout_marginTop="12dp"
-                    android:src="@drawable/pluse_round"
+                    app:srcCompat="@drawable/pluse_round"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -104,7 +104,7 @@
                     android:layout_width="24dp"
                     android:layout_height="24dp"
                     android:layout_marginTop="12dp"
-                    android:src="@drawable/log_out"
+                    app:srcCompat="@drawable/log_out"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -143,7 +143,7 @@
                 android:layout_width="24dp"
                 android:layout_height="24dp"
                 android:layout_marginTop="12dp"
-                android:src="@drawable/shopping_bag"
+                app:srcCompat="@drawable/shopping_bag"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -183,7 +183,7 @@
                     android:layout_width="24dp"
                     android:layout_height="24dp"
                     android:layout_marginTop="12dp"
-                    android:src="@drawable/user_plus"
+                    app:srcCompat="@drawable/user_plus"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -222,7 +222,7 @@
                     android:layout_width="24dp"
                     android:layout_height="24dp"
                     android:layout_marginTop="12dp"
-                    android:src="@drawable/user"
+                    app:srcCompat="@drawable/user"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -262,7 +262,7 @@
                     android:layout_width="24dp"
                     android:layout_height="24dp"
                     android:layout_marginTop="12dp"
-                    android:src="@drawable/eye"
+                    app:srcCompat="@drawable/eye"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -302,7 +302,7 @@
                 android:layout_width="24dp"
                 android:layout_height="24dp"
                 android:layout_marginTop="12dp"
-                android:src="@drawable/users"
+                app:srcCompat="@drawable/users"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -319,6 +319,4 @@
                 app:layout_constraintTop_toBottomOf="@+id/imageView17" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
-
-d
 </androidx.constraintlayout.widget.ConstraintLayout>

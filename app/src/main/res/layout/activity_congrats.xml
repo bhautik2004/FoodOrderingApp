@@ -28,7 +28,7 @@
             android:layout_height="300dp"
             android:layout_gravity="center"
             android:layout_marginTop="32dp"
-            android:src="@drawable/congratulation" />
+            app:srcCompat="@drawable/congratulation" />
 
         <Button
             android:id="@+id/gohome"

@@ -14,7 +14,7 @@
         android:layout_marginLeft="8dp"
         android:background="@color/white"
         android:scaleType="centerCrop"
-        android:src="@drawable/arrow_left"
+        app:srcCompat="@drawable/arrow_left"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_goneMarginStart="8dp" />
@@ -63,7 +63,7 @@
         android:fontFamily="@font/candal"
         android:text="user@gmail.com"
         android:textColor="@color/black"
-        android:textSize="20sp"
+        android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="@+id/nameTextView"
         app:layout_constraintStart_toStartOf="@+id/nameTextView"
         app:layout_constraintTop_toBottomOf="@+id/nameTextView" />

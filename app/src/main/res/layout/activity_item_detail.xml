@@ -14,7 +14,7 @@
         android:layout_marginLeft="8dp"
         android:background="@color/white"
         android:scaleType="centerCrop"
-        android:src="@drawable/arrow_left"
+        app:srcCompat="@drawable/arrow_left"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_goneMarginStart="8dp" />
@@ -23,12 +23,13 @@
         android:id="@+id/foodinfo"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
         android:layout_span="3"
         android:fontFamily="@font/candal"
         android:gravity="top"
         android:padding="10dp"
         android:text="Food Info"
-        android:layout_marginTop="8dp"
+
         android:textAlignment="center"
         android:textColor="@color/textcolor"
         android:textSize="40sp"
@@ -51,7 +52,7 @@
             android:layout_height="200dp"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="8dp"
-            android:src="@drawable/burrgar" />
+            app:srcCompat="@drawable/burrgar" />
 
         <TableLayout
             android:layout_width="match_parent"
