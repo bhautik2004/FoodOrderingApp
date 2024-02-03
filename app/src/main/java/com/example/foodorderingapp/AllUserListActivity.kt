@@ -12,7 +12,7 @@ import kotlinx.android.synthetic.main.activity_admin_profile.*
 class AllUserListActivity : AppCompatActivity() {
     private lateinit var recyclerView: RecyclerView
     private lateinit var button: Button
-    lateinit var dbh:DatabaseHelper
+    lateinit var dbh: DatabaseHelper
     private lateinit var newArray: ArrayList<Userlist>
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -27,13 +27,14 @@ class AllUserListActivity : AppCompatActivity() {
         recyclerView.setHasFixedSize(true)
         displayuser()
     }
-    private fun displayuser(){
-        var newcursor :Cursor? = dbh.getUser()
+
+    private fun displayuser() {
+        var newcursor: Cursor? = dbh.getUser()
         newArray = ArrayList<Userlist>()
-        while (newcursor!!.moveToNext()){
+        while (newcursor!!.moveToNext()) {
             val uname = newcursor.getString(1)
             val uemail = newcursor.getString(2)
-            newArray.add(Userlist(uname,uemail))
+            newArray.add(Userlist(uname, uemail))
         }
         recyclerView.adapter = UserAdapter(newArray)
     }

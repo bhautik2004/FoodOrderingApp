@@ -1,32 +1,16 @@
 package com.example.foodorderingapp
 
-import androidx.appcompat.app.AppCompatActivity
-import androidx.constraintlayout.widget.ConstraintLayout
-import androidx.core.content.ContextCompat
-
-import android.Manifest
 import android.app.Activity
-import android.content.ContentValues
 import android.content.Intent
-import android.content.pm.PackageManager
-import android.database.sqlite.SQLiteDatabase
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.graphics.drawable.BitmapDrawable
-import android.media.Image
 import android.net.Uri
 import android.os.Bundle
-import android.text.Editable
 import android.view.View
-import android.widget.Button
-import android.widget.EditText
-import android.widget.ImageButton
-import android.widget.ImageView
-import android.widget.TextView
-import android.widget.Toast
-
+import android.widget.*
+import androidx.appcompat.app.AppCompatActivity
 import java.io.ByteArrayOutputStream
-
 
 class AddItem : AppCompatActivity() {
     private var isEditMode = false
@@ -41,7 +25,6 @@ class AddItem : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_add_item2)
-
         db = DatabaseHelper(this)
         val helper = DatabaseHelper(this)
         val FoodName = findViewById<View>(R.id.enterFoodName) as EditText
@@ -51,7 +34,6 @@ class AddItem : AppCompatActivity() {
         val selectButton = findViewById<View>(R.id.selectImage) as TextView
         val addItemButton = findViewById<View>(R.id.addItemButton) as Button
         val backButton = findViewById<View>(R.id.backButton) as ImageButton
-        //get data from intent
         val i = intent
         isEditMode = i.getBooleanExtra("isEditMode", false)
         if (isEditMode) {
@@ -77,29 +59,20 @@ class AddItem : AppCompatActivity() {
             } else {
                 selectedImage.setImageResource(R.drawable.burrgar)
             }
-
             FoodName.setText(foodname)
             FoodPrice.setText(foodprice)
             foodDescription.setText(fooddescription)
-
-
         }
         backButton.setOnClickListener { finish() }
-
-
         selectButton.setOnClickListener {
             val i = Intent()
             i.type = "image/*"
             i.action = Intent.ACTION_GET_CONTENT
             startActivityForResult(Intent.createChooser(i, "Select Picture"), SELECT_PICTURE)
         }
-
         addItemButton.setOnClickListener(object : View.OnClickListener {
-
             override fun onClick(view: View) {
-
-
-                if (FoodName.text.length == 0 || FoodPrice.text.length == 0 || foodDescription.text.length == 0) {
+                if (FoodName.text.isEmpty() || FoodPrice.text.isEmpty() || foodDescription.text.isEmpty()) {
                     Toast.makeText(this@AddItem, "Please Fill All Fields", Toast.LENGTH_SHORT)
                         .show()
                 } else {

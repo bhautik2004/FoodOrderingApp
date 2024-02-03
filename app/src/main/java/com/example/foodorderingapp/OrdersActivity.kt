@@ -17,11 +17,9 @@ class OrdersActivity : AppCompatActivity() {
             finish()
         }
         val ordersList = DatabaseHelper(this).getAllOrders()
-
         val recyclerView: RecyclerView = findViewById(R.id.ordersRV)
-        val adapter = OrdersAdapter(this,ordersList)
+        val adapter = OrdersAdapter(this, ordersList)
         recyclerView.layoutManager = LinearLayoutManager(this)
         recyclerView.adapter = adapter
-
     }
 }

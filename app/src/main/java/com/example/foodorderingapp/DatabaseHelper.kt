@@ -39,8 +39,6 @@ class DatabaseHelper(private val context: Context) : SQLiteOpenHelper(
         const val COLUMN_TOTAL_AMOUNT = "order_total_amount"
         const val COLUMN_PHONE = "phone"
         const val COLUMN_ADDRESS = "address"
-
-
     }
 
     override fun onCreate(db: SQLiteDatabase?) {
@@ -67,8 +65,8 @@ class DatabaseHelper(private val context: Context) : SQLiteOpenHelper(
                 "$FOOD_PRICE_COLUMN REAL," +
                 "$FOOD_IMAGE_COLUMN BLOB," +
                 "$FOOD_DESCRIPTION_COLUMN TEXT)")
-
         db?.execSQL(foodItemTableQuery)
+        // Cart Table
         val cartTableQuery = (
                 "CREATE TABLE $TABLE_CART (" +
                         "$ID_COLUMN INTEGER PRIMARY KEY AUTOINCREMENT," +
@@ -83,7 +81,7 @@ class DatabaseHelper(private val context: Context) : SQLiteOpenHelper(
 
         db?.execSQL(cartTableQuery)
 
-
+        //orders Table
         val CREATE_ORDER_TABLE =
             "CREATE TABLE $TABLE_ORDER (" +
                     "$ORDER_ID_COLUMN INTEGER PRIMARY KEY AUTOINCREMENT, " +
@@ -130,7 +128,6 @@ class DatabaseHelper(private val context: Context) : SQLiteOpenHelper(
         }
     }
 
-
     fun signup(name: String, email: String, password: String): Long {
 
         if (userExists(email)) {
@@ -154,15 +151,12 @@ class DatabaseHelper(private val context: Context) : SQLiteOpenHelper(
         val columns = arrayOf(COLUMN_ID)
         val selection = "$COLUMN_EMAIL = ?"
         val selectionArgs = arrayOf(email)
-
         val cursor: Cursor =
             db.query(TABLE_USERS, columns, selection, selectionArgs, null, null, null)
 
         val userExists = cursor.count > 0
-
         cursor.close()
         db.close()
-
         return userExists
     }
 
@@ -182,10 +176,8 @@ class DatabaseHelper(private val context: Context) : SQLiteOpenHelper(
         val columns = arrayOf(COLUMN_ID)
         val selection = "$COLUMN_EMAIL = ?"
         val selectionArgs = arrayOf(email)
-
         val cursor: Cursor =
             db.query(TABLE_USERS, columns, selection, selectionArgs, null, null, null)
-
         var userId: Long = -1
         if (cursor.moveToFirst()) {
             userId = cursor.getLong(cursor.getColumnIndex(COLUMN_ID))
@@ -194,6 +186,7 @@ class DatabaseHelper(private val context: Context) : SQLiteOpenHelper(
         db.close()
         return userId
     }
+
     fun adminlogin(email: String, password: String): Boolean {
         val db = this.readableDatabase
         val selection = "$COLUMN_EMAIL = ? AND $COLUMN_PASSWORD = ?"
@@ -220,7 +213,6 @@ class DatabaseHelper(private val context: Context) : SQLiteOpenHelper(
         val id = db.insert(TABLE_FOOD, null, values)
         return id > 0
         db.close()
-
     }
 
     @SuppressLint("Range")
@@ -229,10 +221,8 @@ class DatabaseHelper(private val context: Context) : SQLiteOpenHelper(
         val columns = arrayOf(COLUMN_NAME)
         val selection = "$COLUMN_EMAIL = ?"
         val selectionArgs = arrayOf(email)
-
         val cursor: Cursor =
             db.query(TABLE_USERS, columns, selection, selectionArgs, null, null, null)
-
         var userName: String? = null
         if (cursor.moveToFirst()) {
             userName = cursor.getString(cursor.getColumnIndex(COLUMN_NAME))
@@ -248,10 +238,8 @@ class DatabaseHelper(private val context: Context) : SQLiteOpenHelper(
         val columns = arrayOf(COLUMN_NAME)
         val selection = "$COLUMN_EMAIL = ?"
         val selectionArgs = arrayOf(email)
-
         val cursor: Cursor =
             db.query(TABLE_ADMIN, columns, selection, selectionArgs, null, null, null)
-
         var userName: String? = null
         if (cursor.moveToFirst()) {
             userName = cursor.getString(cursor.getColumnIndex(COLUMN_NAME))
@@ -342,13 +330,10 @@ class DatabaseHelper(private val context: Context) : SQLiteOpenHelper(
     @SuppressLint("Range")
     fun addToCart(userId: Long, foodId: Int, quantity: Int): Long {
         val db = this.writableDatabase
-
-        // Check if the item is already in the cart
         val checkQuery =
             "SELECT $ID_COLUMN, $FOOD_QUANTITY FROM $TABLE_CART WHERE $USER_ID = ? AND $FOOD_ID_COLUMN = ? AND $ORDER_ID_COLUMN IS NULL"
         val checkArgs = arrayOf(userId.toString(), foodId.toString())
         val cursor = db.rawQuery(checkQuery, checkArgs)
-
         if (cursor.count > 0) {
             cursor.moveToFirst()
             val existingItemId = cursor.getLong(cursor.getColumnIndex(ID_COLUMN))
@@ -363,17 +348,14 @@ class DatabaseHelper(private val context: Context) : SQLiteOpenHelper(
             put(FOOD_ID_COLUMN, foodId)
             put(FOOD_QUANTITY, quantity)
         }
-
         val id = db.insert(TABLE_CART, null, values)
         db.close()
-
         return id
     }
 
     @SuppressLint("Range")
     fun getCartItems(userId: Long): ArrayList<CartItem> {
         val itemList = ArrayList<CartItem>()
-
         val selectQuery =
             "SELECT $TABLE_CART.$ID_COLUMN, " +
                     "$TABLE_CART.$FOOD_ID_COLUMN, " +
@@ -386,10 +368,8 @@ class DatabaseHelper(private val context: Context) : SQLiteOpenHelper(
                     "JOIN $TABLE_FOOD ON $TABLE_CART.$FOOD_ID_COLUMN = $TABLE_FOOD.$ID_COLUMN " +
                     "WHERE $TABLE_CART.$USER_ID =? " +
                     "AND $TABLE_CART.$ORDER_ID_COLUMN IS NULL"
-
         val db = this.writableDatabase
         val cursor = db.rawQuery(selectQuery, arrayOf(userId.toString()))
-
         if (cursor.moveToFirst()) {
             do {
                 val id = cursor.getString(cursor.getColumnIndex(ID_COLUMN))
@@ -400,7 +380,6 @@ class DatabaseHelper(private val context: Context) : SQLiteOpenHelper(
                 val foodImageByteArray = cursor.getBlob(cursor.getColumnIndex(FOOD_IMAGE_COLUMN))
                 val foodDescription =
                     cursor.getString(cursor.getColumnIndex(FOOD_DESCRIPTION_COLUMN))
-
                 val cartItem = CartItem(
                     id,
                     foodId,
@@ -413,13 +392,11 @@ class DatabaseHelper(private val context: Context) : SQLiteOpenHelper(
                 itemList.add(cartItem)
             } while (cursor.moveToNext())
         }
-
         cursor.close()
         db.close()
 
         return itemList
     }
-
 
     fun deleteCartItem(userId: Long, cartItemId: String) {
         val db = writableDatabase
@@ -436,7 +413,6 @@ class DatabaseHelper(private val context: Context) : SQLiteOpenHelper(
         val values = ContentValues().apply {
             put(ORDER_ID_COLUMN, orderId)
         }
-
         val rowsAffected = db.update(
             TABLE_CART,
             values,
@@ -450,7 +426,6 @@ class DatabaseHelper(private val context: Context) : SQLiteOpenHelper(
     @SuppressLint("Range")
     fun getAllOrders(): ArrayList<Order> {
         val orderList = ArrayList<Order>()
-
         val selectQuery = "SELECT * FROM $TABLE_ORDER"
         val db = this.readableDatabase
         val cursor = db.rawQuery(selectQuery, null)
@@ -466,10 +441,8 @@ class DatabaseHelper(private val context: Context) : SQLiteOpenHelper(
                 orderList.add(order)
             } while (cursor.moveToNext())
         }
-
         cursor.close()
         db.close()
-
         return orderList
     }
 
@@ -487,7 +460,6 @@ class DatabaseHelper(private val context: Context) : SQLiteOpenHelper(
         )
         val selection = "$ORDER_ID_COLUMN = ?"
         val selectionArgs = arrayOf(orderId.toString())
-
         val cursor: Cursor = db.query(
             TABLE_ORDER,
             columns,
@@ -506,7 +478,6 @@ class DatabaseHelper(private val context: Context) : SQLiteOpenHelper(
             val address = cursor.getString(cursor.getColumnIndex(COLUMN_ADDRESS))
             val date = cursor.getString(cursor.getColumnIndex(COLUMN_DATE))
             val totalAmount = cursor.getString(cursor.getColumnIndex(COLUMN_TOTAL_AMOUNT))
-
             orderDetails = OrderDetails(
                 orderId,
                 username,
@@ -525,7 +496,6 @@ class DatabaseHelper(private val context: Context) : SQLiteOpenHelper(
     @SuppressLint("Range")
     fun getOrderedItems(orderId: Long): List<CartItem> {
         val itemList = ArrayList<CartItem>()
-
         val selectQuery =
             "SELECT $TABLE_CART.$ID_COLUMN, " +
                     "$TABLE_CART.$FOOD_ID_COLUMN, " +
@@ -536,7 +506,6 @@ class DatabaseHelper(private val context: Context) : SQLiteOpenHelper(
                     "FROM $TABLE_CART " +
                     "JOIN $TABLE_FOOD ON $TABLE_CART.$FOOD_ID_COLUMN = $TABLE_FOOD.$ID_COLUMN " +
                     "WHERE $TABLE_CART.$ORDER_ID_COLUMN = ?"
-
         val db = this.writableDatabase
         val cursor = db.rawQuery(selectQuery, arrayOf(orderId.toString()))
 
@@ -552,28 +521,20 @@ class DatabaseHelper(private val context: Context) : SQLiteOpenHelper(
                     cursor.getInt(cursor.getColumnIndex("$TABLE_CART.$FOOD_QUANTITY"))
                 val foodImageByteArray =
                     cursor.getBlob(cursor.getColumnIndex("$TABLE_FOOD.$FOOD_IMAGE_COLUMN"))
-
                 val cartItem =
                     CartItem(id, foodId, foodName, foodPrice, foodQuantity, foodImageByteArray, "")
                 itemList.add(cartItem)
             } while (cursor.moveToNext())
         }
-
         cursor.close()
         db.close()
-
         return itemList
     }
 
     fun deleteOrder(orderId: Long) {
         val db = writableDatabase
-
-        // Delete cart items associated with the order
         deleteCartItemsForOrder(db, orderId)
-
-        // Delete the order
         db.delete(TABLE_ORDER, "$ORDER_ID_COLUMN = ?", arrayOf(orderId.toString()))
-
         db.close()
     }
 
@@ -588,7 +549,6 @@ class DatabaseHelper(private val context: Context) : SQLiteOpenHelper(
     @SuppressLint("Range")
     fun getFoodOrderDetailsForUser(email: String): ArrayList<MyOrderDetails> {
         val foodOrderDetailsList = ArrayList<MyOrderDetails>()
-
         val selectQuery =
             "SELECT " +
                     "$TABLE_FOOD.$FOOD_NAME_COLUMN, " +
@@ -601,10 +561,8 @@ class DatabaseHelper(private val context: Context) : SQLiteOpenHelper(
                     "JOIN $TABLE_FOOD ON $TABLE_CART.$FOOD_ID_COLUMN = $TABLE_FOOD.$ID_COLUMN " +
                     "JOIN $TABLE_USERS ON $TABLE_ORDER.$COLUMN_EMAIL = $TABLE_USERS.$COLUMN_EMAIL " +
                     "WHERE $TABLE_USERS.$COLUMN_EMAIL = ?"
-
         val db = this.writableDatabase
         val cursor = db.rawQuery(selectQuery, arrayOf(email))
-
         if (cursor.moveToFirst()) {
             do {
                 val foodName =
@@ -617,16 +575,13 @@ class DatabaseHelper(private val context: Context) : SQLiteOpenHelper(
                     cursor.getString(cursor.getColumnIndex("$TABLE_ORDER.$COLUMN_DATE"))
                 val foodImage =
                     cursor.getBlob(cursor.getColumnIndex("$TABLE_FOOD.$FOOD_IMAGE_COLUMN")) // Retrieve food image data
-
                 val foodOrderDetails =
                     MyOrderDetails(foodName, foodPrice, foodQuantity, orderDateTime, foodImage)
                 foodOrderDetailsList.add(foodOrderDetails)
             } while (cursor.moveToNext())
         }
-
         cursor.close()
         db.close()
-
         return foodOrderDetailsList
     }
 }

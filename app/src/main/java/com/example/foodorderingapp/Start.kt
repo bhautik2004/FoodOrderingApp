@@ -14,7 +14,6 @@ class Start : AppCompatActivity() {
         nextbutton.setOnClickListener {
             val intent  = Intent(this,LoginActivity::class.java)
             startActivity(intent)
-
         }
     }
 }

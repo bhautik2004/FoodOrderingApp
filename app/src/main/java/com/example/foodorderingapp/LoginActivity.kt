@@ -16,7 +16,8 @@ class LoginActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        val sharedPreferences: SharedPreferences = getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE)
+        val sharedPreferences: SharedPreferences =
+            getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE)
         val userEmail = sharedPreferences.getString("user_email", null)
 
         if (userEmail != null) {
@@ -25,7 +26,6 @@ class LoginActivity : AppCompatActivity() {
             finish()
         } else {
             setContentView(R.layout.activity_login)
-
             signuplink.setOnClickListener {
                 val intent = Intent(this, SignUpActivity::class.java)
                 startActivity(intent)
@@ -34,7 +34,6 @@ class LoginActivity : AppCompatActivity() {
             addToCartbtn.setOnClickListener {
                 val userEmail = adminEmail.text.toString()
                 val userPassword = adminPassword.text.toString()
-
                 if (userEmail.isEmpty() || userPassword.isEmpty()) {
                     Toast.makeText(this, "Please Fill All Fields", Toast.LENGTH_SHORT).show()
                 } else if (!isValidEmail(userEmail)) {
@@ -53,7 +52,6 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private val databaseHelper = DatabaseHelper(this)
-
     private fun loginDatabase(email: String, password: String) {
         val isUser = databaseHelper.login(email, password)
         if (isUser) {

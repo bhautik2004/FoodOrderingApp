@@ -21,25 +21,18 @@ class OrderDetailsActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_order_details)
-
         backButton.setOnClickListener {
             finish()
         }
-
         val sharedPreferences = getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE)
         val user_email = sharedPreferences.getString("user_email", null).toString()
-
         val db = DatabaseHelper(this)
         val userId = db.getUserIdByEmail(user_email)
         val userName: String = db.getUserNameByEmail(user_email).toString()
-
         val username = findViewById<EditText>(R.id.username)
         username.setText(userName)
-
         val useremail = findViewById<EditText>(R.id.useremail)
         useremail.setText(user_email)
-
-
         val cartItems = db.getCartItems(userId)
         val totalAmount = calculateTotalAmount(cartItems).toInt()
         val formattedTotalAmount = "₹ $totalAmount"
@@ -71,24 +64,23 @@ class OrderDetailsActivity : AppCompatActivity() {
                 )
                 Log.d("OrderDetailsActivity", "Order ID: $orderID")
                 if (orderID > 0) {
-                        val success = db.updateOrderIdInCartForUser(userId, orderID)
-                        if (success) {
-                            Toast.makeText(this, "Order Placed Successfully", Toast.LENGTH_SHORT)
-                                .show()
-                            val intent = Intent(this, CongratsActivity::class.java)
-                            startActivity(intent)
-                            finish()
-                        } else {
-                            Toast.makeText(this, "Failed To Placed Order", Toast.LENGTH_SHORT)
-                                .show()
-                        }
+                    val success = db.updateOrderIdInCartForUser(userId, orderID)
+                    if (success) {
+                        Toast.makeText(this, "Order Placed Successfully", Toast.LENGTH_SHORT)
+                            .show()
+                        val intent = Intent(this, CongratsActivity::class.java)
+                        startActivity(intent)
+                        finish()
+                    } else {
+                        Toast.makeText(this, "Failed To Placed Order", Toast.LENGTH_SHORT)
+                            .show()
+                    }
 
                 } else {
                     Toast.makeText(this, "Failed To Placed Order", Toast.LENGTH_SHORT).show()
                 }
             }
         }
-
     }
 
     private fun isValidPhoneNumber(phoneNumber: String): Boolean {
@@ -110,5 +102,4 @@ class OrderDetailsActivity : AppCompatActivity() {
         val date = Date()
         return dateFormat.format(date)
     }
-
 }

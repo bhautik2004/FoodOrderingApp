@@ -13,9 +13,9 @@ class CongratsActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_congrats)
-        val gohome  = findViewById<Button>(R.id.gohome)
+        val gohome = findViewById<Button>(R.id.gohome)
         gohome.setOnClickListener {
-            val intent = Intent(this,MainActivity::class.java)
+            val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
             finish()
         }

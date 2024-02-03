@@ -14,24 +14,24 @@ class SignUpActivity : AppCompatActivity() {
         setContentView(R.layout.activity_sign_up)
 
         loginlink.setOnClickListener {
-            val intent = Intent(this,LoginActivity::class.java)
+            val intent = Intent(this, LoginActivity::class.java)
             startActivity(intent)
         }
-
         createadminuserButton.setOnClickListener {
             val signupName = userName.text.toString()
             val signupEmail = userEmail.text.toString()
             val signupPassword = userPassword.text.toString()
-              if(signupName.isEmpty() || signupEmail.isEmpty() || signupPassword.isEmpty()){
-                  Toast.makeText(this,"Please Fill All Fields",Toast.LENGTH_SHORT).show()
-            }else if (!isValidEmail(signupEmail)) {
-                  Toast.makeText(this, "Please Enter a Valid Email", Toast.LENGTH_SHORT).show()
-              } else{
-                  signupDatabase(signupName,signupEmail,signupPassword)
+            if (signupName.isEmpty() || signupEmail.isEmpty() || signupPassword.isEmpty()) {
+                Toast.makeText(this, "Please Fill All Fields", Toast.LENGTH_SHORT).show()
+            } else if (!isValidEmail(signupEmail)) {
+                Toast.makeText(this, "Please Enter a Valid Email", Toast.LENGTH_SHORT).show()
+            } else {
+                signupDatabase(signupName, signupEmail, signupPassword)
             }
         }
 
     }
+
     val databaseHelper = DatabaseHelper(this)
     private fun signupDatabase(name: String, email: String, password: String) {
         try {

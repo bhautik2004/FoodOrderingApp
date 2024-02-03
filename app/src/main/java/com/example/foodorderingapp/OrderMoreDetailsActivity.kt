@@ -26,16 +26,14 @@ class OrderMoreDetailsActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_order_more_details)
         backButton.setOnClickListener {
-            val intent = Intent(this,OrdersActivity::class.java)
+            val intent = Intent(this, OrdersActivity::class.java)
             startActivity(intent)
             finish()
         }
 
         val db = DatabaseHelper(this)
-        val orderId = intent.getLongExtra("orderid",1L)
-
+        val orderId = intent.getLongExtra("orderid", 1L)
         if (orderId != null) {
-
             val orderDetails = db.getOrderDetails(orderId)
             Log.d("OrderDetails", orderDetails.toString())
             if (orderDetails != null) {
@@ -51,14 +49,12 @@ class OrderMoreDetailsActivity : AppCompatActivity() {
         val orderItemsAdapter = OrderItemsAdapter(orderItems)
         recyclerViewOrderItems.layoutManager = LinearLayoutManager(this)
         recyclerViewOrderItems.adapter = orderItemsAdapter
-
         val deliveredbtn = findViewById<Button>(R.id.deliveredbtn)
         deliveredbtn.setOnClickListener {
             if (orderId > 0) {
                 db.deleteOrder(orderId)
                 Toast.makeText(this, "Order Delivered Successfully", Toast.LENGTH_SHORT).show()
-
-                val intent = Intent(this,OrdersActivity::class.java)
+                val intent = Intent(this, OrdersActivity::class.java)
                 startActivity(intent)
                 finish()
             } else {
@@ -66,5 +62,4 @@ class OrderMoreDetailsActivity : AppCompatActivity() {
             }
         }
     }
-
 }
