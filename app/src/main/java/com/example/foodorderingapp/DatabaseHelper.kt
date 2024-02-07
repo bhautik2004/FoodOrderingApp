@@ -43,7 +43,7 @@ class DatabaseHelper(private val context: Context) : SQLiteOpenHelper(
 
     override fun onCreate(db: SQLiteDatabase?) {
         //users Table
-        val UsersTableQuery = ("CREATE TABLE $TABLE_USERS (" +
+        val UsersTableQuery = ("CREATE TABLE IF NOT EXISTS $TABLE_USERS (" +
                 "$COLUMN_ID INTEGER PRIMARY KEY AUTOINCREMENT, " +
                 "$COLUMN_NAME TEXT, " +
                 "$COLUMN_EMAIL TEXT, " +
@@ -51,7 +51,7 @@ class DatabaseHelper(private val context: Context) : SQLiteOpenHelper(
         db?.execSQL(UsersTableQuery)
 
         // admin Table
-        val adminTableQuery = ("CREATE TABLE $TABLE_ADMIN (" +
+        val adminTableQuery = ("CREATE TABLE IF NOT EXISTS $TABLE_ADMIN (" +
                 "$COLUMN_ID INTEGER PRIMARY KEY AUTOINCREMENT, " +
                 "$COLUMN_NAME TEXT, " +
                 "$COLUMN_EMAIL TEXT, " +
@@ -59,7 +59,7 @@ class DatabaseHelper(private val context: Context) : SQLiteOpenHelper(
         db?.execSQL(adminTableQuery)
 
         // Food_Items Table
-        val foodItemTableQuery = (" CREATE TABLE $TABLE_FOOD (" +
+        val foodItemTableQuery = (" CREATE TABLE IF NOT EXISTS $TABLE_FOOD (" +
                 "$ID_COLUMN INTEGER PRIMARY KEY AUTOINCREMENT," +
                 "$FOOD_NAME_COLUMN TEXT," +
                 "$FOOD_PRICE_COLUMN REAL," +
@@ -68,7 +68,7 @@ class DatabaseHelper(private val context: Context) : SQLiteOpenHelper(
         db?.execSQL(foodItemTableQuery)
         // Cart Table
         val cartTableQuery = (
-                "CREATE TABLE $TABLE_CART (" +
+                "CREATE TABLE IF NOT EXISTS $TABLE_CART (" +
                         "$ID_COLUMN INTEGER PRIMARY KEY AUTOINCREMENT," +
                         "$USER_ID INTEGER," +
                         "$FOOD_ID_COLUMN INTEGER," +
@@ -83,7 +83,7 @@ class DatabaseHelper(private val context: Context) : SQLiteOpenHelper(
 
         //orders Table
         val CREATE_ORDER_TABLE =
-            "CREATE TABLE $TABLE_ORDER (" +
+            "CREATE TABLE IF NOT EXISTS $TABLE_ORDER (" +
                     "$ORDER_ID_COLUMN INTEGER PRIMARY KEY AUTOINCREMENT, " +
                     "$COLUMN_NAME TEXT, " +
                     "$COLUMN_EMAIL TEXT, " +

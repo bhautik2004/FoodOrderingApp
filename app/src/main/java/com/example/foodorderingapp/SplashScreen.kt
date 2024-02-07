@@ -15,5 +15,7 @@ class SplashScreen : AppCompatActivity() {
             startActivity(intent)
             finish()
         },3000)
+        val db = DatabaseHelper(this)
+        db.writableDatabase
     }
 }

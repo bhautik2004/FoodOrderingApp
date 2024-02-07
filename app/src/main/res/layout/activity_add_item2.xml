@@ -154,7 +154,6 @@
                 android:textColor="@color/black"
                 app:layout_constraintEnd_toEndOf="@+id/textView17"
                 app:layout_constraintHorizontal_bias="0.055"
-
                 app:layout_constraintStart_toStartOf="@+id/textView17"
                 app:layout_constraintTop_toBottomOf="@+id/textView17" />
 
