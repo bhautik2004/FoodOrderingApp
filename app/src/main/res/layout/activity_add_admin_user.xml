@@ -10,14 +10,15 @@
         android:id="@+id/backButton"
         android:layout_width="24dp"
         android:layout_height="24dp"
-        android:layout_marginTop="16dp"
         android:layout_marginLeft="8dp"
+        android:layout_marginTop="16dp"
         android:background="@color/white"
         android:scaleType="centerCrop"
-        app:srcCompat="@drawable/arrow_left"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_goneMarginStart="8dp" />
+        app:layout_goneMarginStart="8dp"
+        app:srcCompat="@drawable/arrow_left" />
+
     <ImageView
         android:id="@+id/imageView4"
         android:layout_width="100dp"

@@ -1,4 +1,5 @@
 package com.example.foodorderingapp.Adapter
+
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
@@ -9,25 +10,25 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
+import androidx.recyclerview.widget.RecyclerView
 import com.example.foodorderingapp.DatabaseHelper
+import com.example.foodorderingapp.FoodDetailsActivity
 import com.example.foodorderingapp.R
 import com.example.foodorderingapp.model.FoodItem
-import androidx.recyclerview.widget.RecyclerView
-import com.example.foodorderingapp.FoodDetailsActivity
-import com.example.foodorderingapp.ItemDetailActivity
 
 class FoodItemAdapter(private val context: Context, private val foodList: List<FoodItem>) :
     RecyclerView.Adapter<FoodItemAdapter.ItemViewHolder>() {
     private val SHARED_PREF_NAME = "foodorderingapp_shared_pref"
-    var dbHelper: DatabaseHelper?= null
+    var dbHelper: DatabaseHelper? = null
 
     class ItemViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val foodName: TextView = itemView.findViewById(R.id.foodName)
         val foodPrice: TextView = itemView.findViewById(R.id.foodPrice)
         val foodImage: ImageView = itemView.findViewById(R.id.foodImage)
         val foodDescription: TextView = itemView.findViewById(R.id.foodDescription)
-        val addToCartBtn:TextView = itemView.findViewById(R.id.addToCart)
+        val addToCartBtn: TextView = itemView.findViewById(R.id.addToCart)
     }
+
     override fun onBindViewHolder(holder: ItemViewHolder, position: Int) {
         val currentItem = foodList[position]
 
@@ -53,12 +54,14 @@ class FoodItemAdapter(private val context: Context, private val foodList: List<F
             if (userEmail != null) {
                 val user_id: Long = db.getUserIdByEmail(userEmail)
 
-                val addToCartResult: Long = db.addToCart(user_id, Integer.parseInt(currentItem.id), 1)
+                val addToCartResult: Long =
+                    db.addToCart(user_id, Integer.parseInt(currentItem.id), 1)
 
                 if (addToCartResult != -1L) {
                     Toast.makeText(context, "Item Added To Cart", Toast.LENGTH_SHORT).show()
                 } else {
-                    Toast.makeText(context, "Item is already in the cart", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(context, "Item is already in the cart", Toast.LENGTH_SHORT)
+                        .show()
                 }
             } else {
                 Toast.makeText(context, "User not logged in", Toast.LENGTH_SHORT).show()
@@ -66,14 +69,15 @@ class FoodItemAdapter(private val context: Context, private val foodList: List<F
         }
 
     }
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemViewHolder {
-        val itemView = LayoutInflater.from(parent.context).inflate(R.layout.popularitem, parent, false)
+        val itemView =
+            LayoutInflater.from(parent.context).inflate(R.layout.popularitem, parent, false)
 
         return ItemViewHolder(itemView)
     }
 
-
     override fun getItemCount(): Int {
-            return foodList.size
-        }
+        return foodList.size
+    }
 }

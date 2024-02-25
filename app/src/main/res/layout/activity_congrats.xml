@@ -33,15 +33,15 @@
         <Button
             android:id="@+id/gohome"
             android:layout_width="157dp"
-            android:layout_gravity="center"
-            android:textAllCaps="false"
             android:layout_height="57dp"
+            android:layout_gravity="center"
             android:layout_marginTop="32dp"
             android:background="@drawable/addtocartshape"
+            android:fontFamily="@font/candal"
             android:text="Go Home"
+            android:textAllCaps="false"
             android:textColor="@color/white"
-            android:textSize="20sp"
-            android:fontFamily="@font/candal"/>
+            android:textSize="20sp" />
     </LinearLayout>
 
 </FrameLayout>

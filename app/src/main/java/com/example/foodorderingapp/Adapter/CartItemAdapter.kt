@@ -10,7 +10,6 @@ import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.example.foodorderingapp.Adapter.ItemAdapter
 import com.example.foodorderingapp.DatabaseHelper
 import com.example.foodorderingapp.R
 import com.example.foodorderingapp.model.CartItem

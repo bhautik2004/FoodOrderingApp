@@ -33,7 +33,7 @@ class DatabaseHelper(private val context: Context) : SQLiteOpenHelper(
         const val FOOD_PRICE_COLUMN = "food_price"
         const val FOOD_IMAGE_COLUMN = "food_image"
         const val FOOD_DESCRIPTION_COLUMN = "food_description"
-        val ORDER_ID_COLUMN = "order_id"
+        const val ORDER_ID_COLUMN = "order_id"
         const val TABLE_ORDER = "orders"
         const val COLUMN_DATE = "order_date"
         const val COLUMN_TOTAL_AMOUNT = "order_total_amount"
@@ -43,12 +43,12 @@ class DatabaseHelper(private val context: Context) : SQLiteOpenHelper(
 
     override fun onCreate(db: SQLiteDatabase?) {
         //users Table
-        val UsersTableQuery = ("CREATE TABLE IF NOT EXISTS $TABLE_USERS (" +
+        val usersTableQuery = ("CREATE TABLE IF NOT EXISTS $TABLE_USERS (" +
                 "$COLUMN_ID INTEGER PRIMARY KEY AUTOINCREMENT, " +
                 "$COLUMN_NAME TEXT, " +
                 "$COLUMN_EMAIL TEXT, " +
                 "$COLUMN_PASSWORD TEXT)")
-        db?.execSQL(UsersTableQuery)
+        db?.execSQL(usersTableQuery)
 
         // admin Table
         val adminTableQuery = ("CREATE TABLE IF NOT EXISTS $TABLE_ADMIN (" +
@@ -82,7 +82,7 @@ class DatabaseHelper(private val context: Context) : SQLiteOpenHelper(
         db?.execSQL(cartTableQuery)
 
         //orders Table
-        val CREATE_ORDER_TABLE =
+        val  ordersTableQuery=
             "CREATE TABLE IF NOT EXISTS $TABLE_ORDER (" +
                     "$ORDER_ID_COLUMN INTEGER PRIMARY KEY AUTOINCREMENT, " +
                     "$COLUMN_NAME TEXT, " +
@@ -92,9 +92,8 @@ class DatabaseHelper(private val context: Context) : SQLiteOpenHelper(
                     "$COLUMN_DATE TEXT, " +
                     "$COLUMN_TOTAL_AMOUNT TEXT)"
 
-        db?.execSQL(CREATE_ORDER_TABLE)
+        db?.execSQL(ordersTableQuery)
     }
-
     override fun onUpgrade(db: SQLiteDatabase?, oldVersion: Int, newVersion: Int) {
 //        val dropTableQuery = "DROP TABLE IF EXISTS $TABLE_NAME"
 //        db?.execSQL(dropTableQuery)

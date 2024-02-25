@@ -10,14 +10,14 @@
         android:id="@+id/backButton"
         android:layout_width="24dp"
         android:layout_height="24dp"
-        android:layout_marginTop="16dp"
         android:layout_marginLeft="8dp"
+        android:layout_marginTop="16dp"
         android:background="@color/white"
         android:scaleType="centerCrop"
-        app:srcCompat="@drawable/arrow_left"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_goneMarginStart="8dp" />
+        app:layout_goneMarginStart="8dp"
+        app:srcCompat="@drawable/arrow_left" />
 
     <TextView
         android:id="@+id/title"
@@ -81,10 +81,4 @@
         app:layout_constraintEnd_toEndOf="@+id/emailTextView"
         app:layout_constraintStart_toStartOf="@+id/emailTextView"
         app:layout_constraintTop_toBottomOf="@+id/emailTextView" />
-
-
-
-
-
-
 </androidx.constraintlayout.widget.ConstraintLayout>

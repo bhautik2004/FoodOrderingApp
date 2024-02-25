@@ -1,4 +1,5 @@
 package com.example.foodorderingapp.Adapter
+
 import android.graphics.BitmapFactory
 import android.view.LayoutInflater
 import android.view.View
@@ -26,7 +27,8 @@ class OrderItemsAdapter(private val orderItems: List<CartItem>) :
         holder.itemView.textFoodName.text = orderItem.foodName
         holder.itemView.textFoodPrice.text = "Price: ₹${orderItem.foodPrice}"
         holder.itemView.textQuantity.text = "Quantity: ${orderItem.quantity}"
-        val imageBitmap = BitmapFactory.decodeByteArray(orderItem.foodImage, 0, orderItem.foodImage?.size ?: 0)
+        val imageBitmap =
+            BitmapFactory.decodeByteArray(orderItem.foodImage, 0, orderItem.foodImage?.size ?: 0)
         holder.itemView.imageFood.setImageBitmap(imageBitmap)
     }
 

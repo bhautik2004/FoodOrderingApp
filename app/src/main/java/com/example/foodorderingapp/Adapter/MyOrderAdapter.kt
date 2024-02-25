@@ -22,23 +22,25 @@ class MyOrderAdapter(private val orderList: List<MyOrderDetails>) :
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.myorder_sample, parent, false)
+        val view =
+            LayoutInflater.from(parent.context).inflate(R.layout.myorder_sample, parent, false)
         return ViewHolder(view)
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val orderDetails = orderList[position]
-
         with(holder) {
             foodNameTextView.text = orderDetails.foodName
             foodPriceTextView.text = orderDetails.foodPrice
             foodQuantityTextView.text = orderDetails.foodQuantity.toString()
             orderDateTimeTextView.text = orderDetails.orderDateTime
-            val bitmap = BitmapFactory.decodeByteArray(orderDetails.foodImage, 0, orderDetails.foodImage.size)
+            val bitmap = BitmapFactory.decodeByteArray(
+                orderDetails.foodImage,
+                0,
+                orderDetails.foodImage.size
+            )
             foodImageView.setImageBitmap(bitmap)
-
         }
     }
-
     override fun getItemCount(): Int = orderList.size
 }

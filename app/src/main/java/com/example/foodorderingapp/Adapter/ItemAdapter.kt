@@ -13,21 +13,25 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.foodorderingapp.*
 import com.example.foodorderingapp.model.FoodItem
-class ItemAdapter(private val context: Context, private val foodList: List<FoodItem>,  private val itemDeletedListener: OnItemDeletedListener) :
-    RecyclerView.Adapter<ItemAdapter.ViewHolder>() {
 
-    var dbHelper:DatabaseHelper ?= null
+class ItemAdapter(
+    private val context: Context,
+    private val foodList: List<FoodItem>,
+    private val itemDeletedListener: OnItemDeletedListener
+) :
+    RecyclerView.Adapter<ItemAdapter.ViewHolder>() {
+    var dbHelper: DatabaseHelper? = null
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val foodName: TextView = itemView.findViewById(R.id.foodName)
         val foodPrice: TextView = itemView.findViewById(R.id.foodPrice)
         val foodImage: ImageView = itemView.findViewById(R.id.foodImage)
         val foodDescription: TextView = itemView.findViewById(R.id.foodDescription)
-        var foodEdtBtn:ImageView = itemView.findViewById(R.id.foodEdtBtn)
-        var foodDltBtn:ImageView = itemView.findViewById(R.id.foodDltBtn)
+        var foodEdtBtn: ImageView = itemView.findViewById(R.id.foodEdtBtn)
+        var foodDltBtn: ImageView = itemView.findViewById(R.id.foodDltBtn)
     }
 
     interface OnItemDeletedListener {
-            fun onItemDeleted()
+        fun onItemDeleted()
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -41,7 +45,6 @@ class ItemAdapter(private val context: Context, private val foodList: List<FoodI
 
         holder.foodName.text = currentItem.foodName
         holder.foodPrice.text = currentItem.foodPrice
-
         holder.foodDescription.text = currentItem.foodDescription
         val bitmap =
             BitmapFactory.decodeByteArray(currentItem.foodImage, 0, currentItem.foodImage.size)
@@ -53,25 +56,28 @@ class ItemAdapter(private val context: Context, private val foodList: List<FoodI
             context.startActivity(intent)
         }
         holder.foodEdtBtn.setOnClickListener {
-            val intent = Intent(context,AddItem::class.java)
-            intent.putExtra("id",currentItem.id)
-            intent.putExtra("foodName",currentItem.foodName)
-            intent.putExtra("foodPrice",currentItem.foodPrice)
-            val baseImage = android.util.Base64.encodeToString(currentItem.foodImage, android.util.Base64.DEFAULT)
+            val intent = Intent(context, AddItem::class.java)
+            intent.putExtra("id", currentItem.id)
+            intent.putExtra("foodName", currentItem.foodName)
+            intent.putExtra("foodPrice", currentItem.foodPrice)
+            val baseImage = android.util.Base64.encodeToString(
+                currentItem.foodImage,
+                android.util.Base64.DEFAULT
+            )
             intent.putExtra("foodImage", baseImage)
-            intent.putExtra("foodDescription",currentItem.foodDescription)
-            intent.putExtra("isEditMode",true)
+            intent.putExtra("foodDescription", currentItem.foodDescription)
+            intent.putExtra("isEditMode", true)
             context.startActivity(intent)
         }
         holder.foodDltBtn.setOnClickListener {
             showDeleteConfirmationDialog(currentItem)
         }
-
-
     }
+
     override fun getItemCount(): Int {
         return foodList.size
     }
+
     private fun showDeleteConfirmationDialog(currentItem: FoodItem) {
         val builder = AlertDialog.Builder(context)
         builder.setTitle("Confirm Deletion")
@@ -84,16 +90,12 @@ class ItemAdapter(private val context: Context, private val foodList: List<FoodI
         }
 
         val negativeClickListener = DialogInterface.OnClickListener { _, _ ->
-
         }
-
         builder.setPositiveButton("Yes", positiveClickListener)
         builder.setNegativeButton("No", negativeClickListener)
-
         builder.show()
     }
 }
-
 
 
 //    private var contex:Context?=null

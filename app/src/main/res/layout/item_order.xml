@@ -3,11 +3,11 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="horizontal"
     android:layout_marginStart="8dp"
-    android:layout_marginEnd="8dp"
     android:layout_marginTop="8dp"
+    android:layout_marginEnd="8dp"
     android:background="@drawable/edittextshape"
+    android:orientation="horizontal"
     android:padding="8dp">
 
     <ImageView
@@ -15,43 +15,43 @@
         android:layout_width="64dp"
         android:layout_height="64dp"
         android:scaleType="centerCrop"
-        app:srcCompat="@drawable/burrgar"/>
+        app:srcCompat="@drawable/burrgar" />
 
     <LinearLayout
         android:layout_width="0dp"
-        android:layout_weight="1"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_marginStart="8dp">
+        android:layout_marginStart="8dp"
+        android:layout_weight="1"
+        android:orientation="vertical">
 
         <TextView
             android:id="@+id/textFoodName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="18sp"
-            android:paddingStart="16dp"
             android:fontFamily="@font/candal"
+            android:paddingStart="16dp"
             android:text="foodname"
-            android:textColor="@color/black"/>
+            android:textColor="@color/black"
+            android:textSize="18sp" />
 
         <TextView
             android:id="@+id/textFoodPrice"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="14sp"
+            android:fontFamily="@font/candal"
             android:paddingStart="16dp"
             android:text="foodprice"
-            android:fontFamily="@font/candal"
-            android:textColor="@color/textcolor"/>
+            android:textColor="@color/textcolor"
+            android:textSize="14sp" />
 
         <TextView
             android:id="@+id/textQuantity"
-            android:text="foodquantity"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:fontFamily="@font/candal"
             android:paddingStart="16dp"
-            android:textSize="14sp"
-            android:textColor="@color/black"/>
+            android:text="foodquantity"
+            android:textColor="@color/black"
+            android:textSize="14sp" />
     </LinearLayout>
 </LinearLayout>
